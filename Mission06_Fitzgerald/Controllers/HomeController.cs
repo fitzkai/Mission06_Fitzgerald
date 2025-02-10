@@ -1,6 +1,6 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using Mission06_Fitzgerald.Models;
+//using Mission06_Fitzgerald.Models;
 
 namespace Mission06_Fitzgerald.Controllers
 {
@@ -18,15 +18,9 @@ namespace Mission06_Fitzgerald.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult AboutJoel() 
         {
             return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }
