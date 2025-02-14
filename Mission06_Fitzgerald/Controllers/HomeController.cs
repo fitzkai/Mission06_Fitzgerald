@@ -1,6 +1,7 @@
 using System.Diagnostics;
+using AspNetCoreGeneratedDocument;
 using Microsoft.AspNetCore.Mvc;
-//using Mission06_Fitzgerald.Models;
+using Mission06_Fitzgerald.Models;
 
 namespace Mission06_Fitzgerald.Controllers
 {
@@ -22,5 +23,17 @@ namespace Mission06_Fitzgerald.Controllers
         {
             return View();
         }
+
+        [HttpGet]
+        public IActionResult EnterMovie()
+        {
+            return View();
+        }
+
+        //[HttpPost]
+        //public IActionResult EnterMovie()
+        //{
+        //    return View("Confirmation", response);
+        //}
     }
 }
