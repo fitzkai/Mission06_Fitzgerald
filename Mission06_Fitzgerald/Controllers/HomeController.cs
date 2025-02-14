@@ -1,17 +1,18 @@
 using System.Diagnostics;
 using AspNetCoreGeneratedDocument;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Mission06_Fitzgerald.Models;
 
 namespace Mission06_Fitzgerald.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private MovieContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(MovieContext context)
         {
-            _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index()
@@ -30,10 +31,13 @@ namespace Mission06_Fitzgerald.Controllers
             return View();
         }
 
-        //[HttpPost]
-        //public IActionResult EnterMovie()
-        //{
-        //    return View("Confirmation", response);
-        //}
+        [HttpPost]
+        public IActionResult EnterMovie(Movie response)
+        {
+            _context.Movies.Add(response); // add record to database
+            _context.SaveChanges();
+
+            return View("Confirmation", response);
+        }
     }
 }
