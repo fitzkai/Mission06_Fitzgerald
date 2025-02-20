@@ -28,16 +28,72 @@ namespace Mission06_Fitzgerald.Controllers
         [HttpGet]
         public IActionResult EnterMovie()
         {
-            return View();
+            ViewBag.Categories = _context.Categories.ToList();
+            return View(new Movie());
         }
 
         [HttpPost]
         public IActionResult EnterMovie(Movie response)
         {
-            _context.Movies.Add(response); // add record to database
+            if (ModelState.IsValid)
+            {
+                _context.Movies.Add(response); // add record to database
+                _context.SaveChanges();
+
+                return View("Confirmation", response);
+            }
+            else
+            {
+                ViewBag.Categories = _context.Categories.ToList();
+
+                return View(response);
+            }
+        }
+
+        [HttpGet]
+        public IActionResult MovieList()
+        {
+            List<Movie> movies = _context.Movies
+                .Include(x => x.Category)
+                .ToList();
+
+            return View(movies);
+        }
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var recordToEdit = _context.Movies
+                .Single(x => x.MovieID == id);
+
+            ViewBag.Movies = _context.Categories.ToList();
+
+            return View("EnterMovie", recordToEdit);
+        }
+        [HttpPost]
+        public IActionResult Edit(Movie updatedMovie)
+        {
+            _context.Update(updatedMovie);
+            _context.SaveChanges();
+            return RedirectToAction("MovieList");
+        }
+
+        [HttpGet]
+        public IActionResult Delete(int id) 
+        {
+            var recordToDelete = _context.Movies
+                .Single(x => x.MovieID == id);
+
+            return View(recordToDelete);
+        }
+
+        [HttpPost]
+        public IActionResult Delete(Movie deletedMovie)
+        {
+            _context.Update(deletedMovie);
             _context.SaveChanges();
 
-            return View("Confirmation", response);
+            return RedirectToAction("MovieList");
         }
     }
 }

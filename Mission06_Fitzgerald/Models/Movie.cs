@@ -11,18 +11,18 @@ namespace Mission06_Fitzgerald.Models
 
         [ForeignKey("CategoryID")]
         public int? CategoryID { get; set; }
-        public Categories? Category { get; set; }
+        public Category? Category { get; set; }
 
         [Required]
-        public string MovieTitle { get; set; }
+        public string Title { get; set; }
         [Required]
+        [Range(1888, 9999, ErrorMessage = "Enter a valid year")]
         public int Year { get; set; }
-        [Required]
         public string? Director { get; set; }
         public string? Rating { get; set; }
         [Required]
         public bool Edited { get; set; }
-        public string LentTo { get; set; }
+        public string? LentTo { get; set; }
         [Required]
         public bool CopiedToPlex { get; set; }
 

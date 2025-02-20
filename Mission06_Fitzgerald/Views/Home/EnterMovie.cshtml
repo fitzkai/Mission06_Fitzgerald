@@ -6,20 +6,28 @@
 <h1>Add a New Movie to the List</h1>
 
 <form method="post">
-    <label asp-for="MovieTitle">Enter the title of the movie:</label>
-    <input asp-for="MovieTitle" required/>
+
+    <input type="hidden" asp-for="MovieID" />
+
+    <label asp-for="Title">Enter the title of the movie:</label>
+    <input asp-for="Title" required/>
     <br />
-    <label asp-for="Category">Enter the category of the movie:</label>
-    <input asp-for="Category" required/>
+    <select asp-for="CategoryID">
+        <option value="">Select a Category</option>
+        @foreach (Category category in ViewBag.Categories)
+        {
+            <option value="@category.CategoryID">@category.CategoryName</option>
+        }
+    </select>
     <br />
     <label asp-for="Director">Enter the director(s) of the movie:</label>
-    <input asp-for="Director" required />
+    <input asp-for="Director" />
     <br />
     <label asp-for="Year">Enter the year the movie was released:</label>
     <input asp-for="Year" required />
     <br />
     <label asp-for="Rating">Enter the movie rating:</label>
-    <select asp-for="Rating" required>
+    <select asp-for="Rating">
         <option>G</option>
         <option>PG</option>
         <option>PG-13</option>
@@ -27,13 +35,19 @@
     </select>
     <br />
     <label asp-for="Edited">Has the movie been edited?</label>
-    <select asp-for="Edited">
+    <select asp-for="Edited" required>
         <option value="true">Yes</option>
         <option value="false">No</option>
     </select>
     <br />
     <label asp-for="LentTo">If you have lent this movie enter to whom:</label>
     <input asp-for="LentTo"/>
+    <br />
+    <label asp-for="CopiedToPlex">Has the movie been copied to Plex?</label>
+    <select asp-for="CopiedToPlex" required>
+        <option value="true">Yes</option>
+        <option value="false">No</option>
+    </select>
     <br />
     <label asp-for="Notes">Enter any notes:</label>
     <input asp-for="Notes" maxlength="25"/>

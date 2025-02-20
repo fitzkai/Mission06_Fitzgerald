@@ -4,12 +4,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Mission06_Fitzgerald.Models
 {
-    public class Categories
+    public class Category
     {
         [Required]
         [Key]
         public int CategoryID { get; set; }
-        [Required]
         public string CategoryName { get; set; }
 
     }
