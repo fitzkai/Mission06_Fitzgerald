@@ -55,6 +55,7 @@ namespace Mission06_Fitzgerald.Controllers
         {
             List<Movie> movies = _context.Movies
                 .Include(x => x.Category)
+                .OrderBy(x => x.Title)
                 .ToList();
 
             return View(movies);
@@ -90,7 +91,7 @@ namespace Mission06_Fitzgerald.Controllers
         [HttpPost]
         public IActionResult Delete(Movie deletedMovie)
         {
-            _context.Update(deletedMovie);
+            _context.Movies.Remove(deletedMovie);
             _context.SaveChanges();
 
             return RedirectToAction("MovieList");
